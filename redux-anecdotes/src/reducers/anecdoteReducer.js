@@ -26,6 +26,13 @@ export const voteForAnecdote = (id) => {
     }
   }
 
+export const createAnecdote = (anecdote) => {
+  return {
+      type: 'CREATE',
+      data: anecdote
+    }
+  }
+
 const reducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
@@ -44,6 +51,12 @@ const reducer = (state = initialState, action) => {
         anecdote.id !== id ? anecdote : incrementedVote 
       )
       return state
+
+    case 'CREATE':
+      const anecdote = asObject(action.data)
+      state = state.concat(anecdote)
+      return state
+
     default:
       return state
   }
