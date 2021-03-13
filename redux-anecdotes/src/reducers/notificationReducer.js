@@ -1,15 +1,18 @@
 const initialState = 'hello'
 
-export const createNotification = (message) => {
+export const removeNotification = () => {
   return {
-      type: 'NOTIFY',
-      data: message
+      type: 'REMOVE'
     }
   }
 
-export const removeNotification = (message) => {
-  return {
-      type: 'REMOVE'
+export const createNotification = (message, seconds) => {
+  return dispatch =>  {
+      dispatch({
+        type: 'NOTIFY',
+        data: message
+      })
+      setTimeout(() => dispatch(removeNotification()), seconds * 1000)
     }
   }
 
