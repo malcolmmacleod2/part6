@@ -13,10 +13,8 @@ const Anecdotes = () => {
     return anecdotes.filter(a => a.content.includes(filter)).sort((a, b) => b.votes - a.votes)
   })
 
-  const vote = (id) => {
-    dispatch(voteForAnecdote(id))
-
-    const anecdote = anecdotes.find(a => a.id === id)
+  const vote = (anecdote) => {
+    dispatch(voteForAnecdote(anecdote))
     dispatch(createNotification(`You voted for ${anecdote.content}`))
     setTimeout(() => dispatch(removeNotification()), 5000)
 
@@ -31,7 +29,7 @@ const Anecdotes = () => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
+            <button onClick={() => vote(anecdote)}>vote</button>
           </div>
         </div>
       )}
